@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SimpleMVC.Models.Product>
+
+@{
+    ViewData["Title"] = "GetAll";
+}
+@if(@TempData["ALertMessage"] != null){
+     <div class="alert alert-success">
+         @TempData["AlertMessage"]
+     </div>
+}
+   
+
+<h1 class="text-center mt-5">Products</h1>
+<div class="border d-flex justify-content-between py-5 px-3">
+   
+    <a class="btn btn-outline-primary" asp-action="Create">Add New Product</a>
+   
+  
+    <div class="input-group w-25">
+      <input type="text" class="form-control" placeholder="Search product">
+      <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
+    </div>
+</div>
+
+<table class="table border">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                price
+            </th>
+            <th>
+                Update
+            </th>
+            <th>
+                Datails
+            </th>
+            <th>
+                Delete
+            </th>
+            <th>
+                Buy Product
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => product.price)
+                </td>
+                <td>
+                    <button class="btn btn-success">
+                        @Html.ActionLink("Edit", "Update", new { id = product.Id })
+                    </button>
+
+                </td>
+                <td>
+                    <button class="btn btn-info">
+                        @Html.ActionLink("Details", "GetOne", new { id = product.Id})
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger"> @Html.ActionLink("Delete", "Delete", new {  id=product.Id  })</button>
+                </td>
+                <td>
+                    <a class="btn btn-primary">Add To Cart</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
